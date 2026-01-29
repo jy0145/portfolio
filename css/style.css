@@ -36,6 +36,7 @@ ul {
 
 .left {
     width: 300px;
+    height: 770px;
     position: sticky;
     top: 20px;
     margin-right: 100px;
@@ -530,7 +531,8 @@ body.stop-scroll {
 }
 
 .about-text {
-    width: 40%;
+    width: 44%;
+    display: flex;
 }
 
 .about-img img {
@@ -540,8 +542,9 @@ body.stop-scroll {
     border: 1px solid;
 }
 
-.about-text {
-    display: flex;
+.story p{
+    padding-bottom: 20px;
+    line-height: 28px;
 }
 
 .about-text1 {
@@ -664,87 +667,58 @@ body.stop-scroll {
 
 /* --- 반응형 스타일 시작 --- */
 
-/* 1. 공통 반응형 설정 */
-#layout {
-    width: 100%; /* 고정 너비 해제 */
-    max-width: 1820px;
-    flex-direction: row;
-}
-
-/* 2. 태블릿 사이즈 (1200px 이하) */
+/* --- 1200px 이하: 태블릿 및 모바일 통합 설정 --- */
 @media screen and (max-width: 1200px) {
+    /* 1. 왼쪽 메뉴와 메뉴 버튼을 완전히 숨김 */
+    .left, .menu-btn {
+        display: none !important;
+    }
+
+    /* 2. 전체 레이아웃을 한 줄로 정렬 (Flex 해제) */
     #layout {
-        flex-direction: column; /* 왼쪽 메뉴를 상단으로 보낼 수 있도록 변경 */
+        width: 100%;
+        max-width: 100%;
+        display: block;
     }
 
-    .left {
-        width: 90%;
-        position: relative; /* 스티키 해제 */
-        top: 0;
-        margin: 20px auto;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
-    .left .logo, .left .contact-me, .left .menu, .left .skills {
-        margin-top: 20px;
-        width: 45%; /* 요소를 2열로 배치 */
-    }
-
+    /* 3. 오른쪽 영역을 화면에 꽉 차게 조절 */
     .right {
-        width: 95%;
-        margin: 0 auto !important;
+        width: 100%;
+        margin-left: 0 !important;
+        padding: 0 20px; /* 양옆 여백으로 글자가 벽에 붙는 것 방지 */
+        box-sizing: border-box; /* 패딩을 포함해 너비 100% 유지 */
         height: auto; /* 높이 고정 해제 */
     }
 
-    .about {
-        width: 100%;
-        flex-direction: column;
-        align-items: center;
+    /* 4. 인트로 영상 높이 조절 */
+    .intro {
+        height: 500px; /* 태블릿에서는 약간 줄임 */
+        margin-top: 40px; /* 메뉴 버튼이 사라진 자리에 여백 추가 */
     }
 
-    .about-text { width: 100%; margin-bottom: 30px; }
-    .about-img img { height: 500px; }
-
-    .contact-wrap {
-        width: 100%;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-}
-
-/* 3. 모바일 사이즈 (768px 이하) */
-@media screen and (max-width: 768px) {
-    .left {
-        display: none; /* 모바일에서는 왼쪽 메뉴를 숨기고 메뉴버튼 활용 권장 */
-    }
-    
-    #layout.hide-left .left {
-        display: block; /* 토글 시 보이고 싶다면 이 부분 조정 */
-        width: 100%;
-        transform: none;
-    }
-
+    /* 5. 프로젝트 영역 세로 정렬 */
     .project {
         flex-direction: column;
     }
 
     .project-right {
         margin-left: 0;
-        margin-top: 20px;
+        margin-top: 30px;
         text-align: center;
+        align-items: center;
     }
 
     .project-btn {
         flex-direction: column;
         gap: 10px;
+        width: 100%;
     }
 
     .project-btn li {
         width: 100%;
     }
 
+    /* 6. 아트워크 영역 세로 정렬 */
     .art {
         flex-direction: column;
         gap: 20px;
@@ -754,22 +728,98 @@ body.stop-scroll {
         margin-right: 0 !important;
     }
 
-    .experience-p, .projects-p, .artwork-p, .about-p, .contact-p {
-        font-size: 24px;
-        margin: 0 auto 30px;
-        text-align: center;
+    /* 7. 경력(Experience) 영역 정렬 */
+.experience {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* 전체를 중앙으로 모으되 */
+    }
+
+    .experience-wrap {
+        display: flex;
+        justify-content: flex-start; /* 내부 아이템은 왼쪽부터 나란히 */
+        align-items: flex-start;
+        width: 100%;
+        max-width: 450px; /* 이 상자의 너비를 딱 고정해서 세 줄을 맞춥니다 */
+        margin-bottom: 0; /* 아래 .place의 마진과 겹치지 않게 조절 */
     }
 
     .timeline {
+        margin-left: 0 !important; /* 기존 여백 완전 제거 */
+        width: 40px;
+        flex-shrink: 0;
+    }
+
+    .date-place {
         margin-left: 20px;
+        flex: 1; /* 남은 공간을 다 차지해서 정렬 유지 */
+    }
+
+    .date {
+        display: inline-block; /* 글자 길이에 상관없이 박스 유지 */
+        white-space: nowrap;  /* 줄바꿈 방지 */
+    }
+
+    .place {
+        margin-top: 10px;
+        margin-bottom: 60px; /* 각 항목 사이의 간격 */
+        font-size: 18px;
+        word-break: keep-all; /* 단어 단위로 깔끔하게 떨어지게 */
+    }
+    /* 8. 어바웃(About) 영역 세로 정렬 */
+    .about {
+        width: 100%;
+        flex-direction: column-reverse; /* 이미지가 위로 가거나 텍스트가 위로 가게 조절 가능 */
+        align-items: center;
+    }
+
+    .about-text { 
+        width: 100%; 
+        margin-top: 30px;
+        justify-content: center;
+    }
+
+    .about-img img { 
+        width: 100%;
+        height: auto; 
+        max-height: 500px; 
+    }
+
+    /* 9. 컨택트(Contact) 영역 세로 정렬 */
+    .contact-wrap {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
     }
 
     .contact-wrap1 {
-        margin: 20px 0;
-        width: 100%;
+        margin: 30px 0;
     }
 
+    /* 10. 제목들 중앙 정렬 */
+    .experience-p, .projects-p, .artwork-p, .about-p, .contact-p {
+        font-size: 26px;
+        margin: 0 auto 40px;
+        text-align: center;
+    }
+}
+
+/* --- 768px 이하: 스마트폰 추가 조정 --- */
+@media screen and (max-width: 768px) {
     .intro {
-        height: 400px; /* 영상 높이 축소 */
+        height: 300px; /* 스마트폰에서는 영상 더 작게 */
+    }
+
+    .about-text1 {
+        font-size: 18px; /* 글자 크기 살짝 줄임 */
+    }
+    
+    .about-text2 {
+        font-size: 15px;
+        padding-left: 20px;
+    }
+
+    .place {
+        font-size: 16px; /* 경력 장소 텍스트 크기 조절 */
     }
 }
