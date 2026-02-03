@@ -388,7 +388,7 @@ ul {
 }
 
 
-/* 팝업 오버레이 - 전체 화면을 덮음 */
+/* 팝업 오버레이 */
 .popup-overlay {
     display: none;
     /* 평소엔 숨김 */
@@ -665,7 +665,7 @@ body.stop-scroll {
 
 
 
-/* --- 반응형 스타일 시작 --- */
+/* --- 반응형 --- */
 
 /* --- 1200px 이하: 태블릿 및 모바일 통합 설정 --- */
 @media screen and (max-width: 1200px) {
@@ -804,8 +804,8 @@ body.stop-scroll {
     }
 }
 
-/* --- 768px 이하: 스마트폰 추가 조정 --- */
-@media screen and (max-width: 768px) {
+/* --- 768px --- */
+@media screen and (max-width: 767px) {
     .intro {
         height: 300px; /* 스마트폰에서는 영상 더 작게 */
     }
