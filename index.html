@@ -291,18 +291,14 @@
 
     <script>
         $(document).ready(function () {
-            // [1] 상단 메뉴 버튼 토글 기능
-            // 클릭하면 #layout에 'hide-left' 클래스를 넣었다 뺐다 합니다.
+
             $('.menu-btn').on('click', function () {
                 $('#layout').toggleClass('hide-left');
             });
 
-            // [2] 아트웍 팝업용 변수 설정
             const $overlay = $('#popup-overlay');
             const $popupImg = $('#popup-img');
 
-            // [3] .artwork 내의 이미지를 클릭했을 때 팝업 열기
-            // .artwork 내부의 li만 반응하도록 범위를 확실히 정했습니다.
             $('.artwork .art li, .project-btn li').on('click', function () {
                 const newImgSrc = $(this).attr('data-img');
 
@@ -310,13 +306,11 @@
                     $popupImg.attr('src', newImgSrc);
                     $overlay.stop().fadeIn(300);
                     $('body').addClass('stop-scroll');
-                    $overlay.scrollTop(0); // 팝업창 스크롤을 맨 위로
+                    $overlay.scrollTop(0);
                 }
             });
 
-            // [4] 배경 클릭 시 팝업 닫기
             $overlay.on('click', function (e) {
-                // 클릭한 게 이미지가 아니라 검은 배경(overlay)일 때만 작동
                 if (!$(e.target).is('#popup-img')) {
                     $overlay.stop().fadeOut(300);
                     $('body').removeClass('stop-scroll');
